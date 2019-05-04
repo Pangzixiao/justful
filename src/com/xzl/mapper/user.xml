@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    一个mapper 代表一个持久层对象， namespace指向对应的接口
+-->
+<mapper namespace="com.xzl.dao.UserDao">
+    <insert id="saveUser" >
+        insert into t_user (username,password,tel,check_type,regist_date)values(#{username},#{password},#{tel},#{check_type},#{regist_date})
+    </insert>
+
+    <select id="mutiQueryUsers"  resultType="java.util.HashMap">
+        select * from t_user
+        <where>
+            <if test="username != null and username!=''">
+                and username = #{username}
+            </if>
+            <if test="check_type !=null and check_type!=''">
+                and check_type = #{check_type}
+            </if>
+        </where>
+    </select>
+
+</mapper>
