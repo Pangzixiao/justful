@@ -37,6 +37,10 @@
 							<tr>
 								<td><input type="text" class="input_text_200" name="company_id" value="${info.company_id}"/><td>
 							</tr>
+
+							<tr>
+								<td><input type="text" class="input_text_200" name="p_cname" value="${info.company_name}"/><td>
+							</tr>
 							<tr>
 
 								<td width="100" height="30" align="right"><span
@@ -48,20 +52,39 @@
 							<tr>
 								<td height="30" align="right"><span style="...">*</span>职位类型1:</td>
 								<td><select weitht="200" name="p_type1">
-									<option weitht="200" value="技术">技术</option>
+									<option value="技术">技术</option>
+									<option value="产品">产品</option>
+									<option value="设计">设计</option>
+									<option value="运营">运营</option>
+									<option value="销售">销售</option>
+									<option value="职能">职能</option>
+									<option value="">其他</option>
 								</select></td>
 							</tr>
 							<tr>
 								<td height="30" align="right"><span style="...">*</span>职位类型2:</td>
 								<td><select weitht="200" name="p_type2">
+									<option value="前端">前端</option>
 									<option value="后端">后端</option>
+									<option value="DBA">DBA</option>
+									<option value="人工智能">人工智能</option>
+									<option value="测试">测试</option>
+									<option value="运维">运维</option>
+									<option value="高端管理">高端管理</option>
+									<option value="硬件">硬件</option>
+									<option value="">其他</option>
 								</select></td>
 							</tr>
 							<tr>
 								<td height="30" align="right"><span style="...">*</span>职位类型3:</td>
 								<td><select weitht="200" name="p_type3">
 									<option value="java">java</option>
+									<option value="python">python</option>
 									<option value="全栈">全栈</option>
+									<option value="web前端">web前端</option>
+									<option value="html5">html5</option>
+									<option value="flash">flash</option>
+									<option value="">其他</option>
 								</select></td>
 							</tr>
 							<tr>

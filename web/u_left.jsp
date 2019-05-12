@@ -1,7 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script src="//templates/default/js/jquery.dialog.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -26,8 +25,8 @@ $(".left_menu_bg").click(function(){
 
 });
 </script>
-<div class="left_menu_home"><a href="" style="color:#990000">中心首页</a>
-<a href="" style="color:#990000" id="preview">预览简历</a>
+<div class="left_menu_home"><a href="/user/getIndex" style="color:#990000">中心首页</a>
+<a href="/user/showIntroduce" style="color:#990000" id="preview">预览简历</a>
 </div>
 <div id="previewbox" style="display:none">
 <table width="100%" border="0" cellspacing="0" cellpadding="5">
@@ -55,8 +54,8 @@ $(".left_menu_bg").click(function(){
 	</div>
 	<div class="left_menu_btop">
 	<ul>
-			<li><a href="" target="_blank">搜索职位</a></li>
-			<li><a href="">已投简历</a></li>
+			<li><a href="/user/selectPositionPre" target="_blank">搜索职位</a></li>
+			<li><a href="/user/showMyApplay">我的申请</a></li>
 			<div class="clear"></div>
 	  </ul>
 	</div>

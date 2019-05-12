@@ -1,5 +1,6 @@
 package com.xzl.dao;
 
+import javafx.beans.binding.ObjectExpression;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -23,6 +24,11 @@ public interface PositionDao {
 
     @Update("update t_position set p_state = '失效' where position_id = #{position_id}")
     int outdate(int position_id);
-    @Select("select * from t_position where position_id = #{position_id}")
-    Map<String,Object> selectPositionById(int position_id);
+    List<Map<String,Object>> MutiqueryPosition(Map<String, ObjectExpression> param);
+
+    @Select("select * from t_position where company_id = #{company_id}")
+    List<Map<String,Object>> queryPositionByCompanyId(int company_id);
+
+    @Update("update t_position set apply_count = #{apply_count} where position_id = #{position_id}")
+    int addCount(Map<String, Object> m);
 }

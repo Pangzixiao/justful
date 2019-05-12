@@ -1,10 +1,7 @@
 package com.xzl.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.xzl.service.AdmService;
-import com.xzl.service.CompanyService;
-import com.xzl.service.IntroduceService;
-import com.xzl.service.UserService;
+import com.xzl.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,6 +23,9 @@ public class AdminController {
     CompanyService companyService;
     @Resource
     IntroduceService introduceService;
+
+    @Resource
+    TypeService typeService;
 
 
     @RequestMapping("getIndex")
@@ -191,6 +192,180 @@ public class AdminController {
             mav.setViewName("error");
         }
         mav.addObject("info",m);
+        return mav;
+    }
+
+    @RequestMapping("/type1")
+    public ModelAndView getAllType1(){
+        ModelAndView mav = new ModelAndView("a_editType1");
+        List<Map<String,Object>> list = typeService.getType1();
+        mav.addObject("types",list);
+        return mav;
+    }
+
+    @RequestMapping("/getType2Byp1")
+    public ModelAndView getType2Byp1(int p1){
+        ModelAndView mav = new ModelAndView("a_editType2");
+        List<Map<String,Object>> list = typeService.getType2ByP1(p1);
+        mav.addObject("types",list);
+        mav.addObject("p1",p1);
+        return mav;
+    }
+
+    @RequestMapping("/addtype1")
+    public ModelAndView addtype1(String pname){
+        ModelAndView mav = new ModelAndView("a_editType1");
+        if(typeService.addType1(pname)){
+            List<Map<String,Object>> list = typeService.getType1();
+            mav.addObject("types",list);
+        }
+        return mav;
+    }
+
+    @RequestMapping("/addtype2")
+    public ModelAndView addtype2(String pname,int p1){
+        ModelAndView mav = new ModelAndView("a_editType2");
+        if(typeService.addType2(pname,p1)){
+            List<Map<String,Object>> list = typeService.getType2ByP1(p1);
+            mav.addObject("types",list);
+            mav.addObject("p1",p1);
+        }
+        return mav;
+    }
+
+    @RequestMapping("/deletetype1Byp1")
+    public ModelAndView deletetypeByP1(int p1){
+        ModelAndView mav = new ModelAndView("a_editType1");
+        if(typeService.deleteType1ByP1(p1)){
+            List<Map<String,Object>> list = typeService.getType1();
+            mav.addObject("types",list);
+        }else{
+            mav.addObject("msg","删除失败");
+            mav.setViewName("error");
+        }
+        return mav;
+    }
+
+    @RequestMapping("/changType1Pre")
+    public ModelAndView changType1Pre(int p1){
+        ModelAndView mav = new ModelAndView("a_changeType1");
+        Map<String ,Object> type = typeService.getTypeByP1(p1);
+        mav.addObject("type",type);
+        return mav;
+    }
+
+    @RequestMapping("/changType2Pre")
+    public ModelAndView changType2Pre(int p2,int p1){
+        ModelAndView mav = new ModelAndView("a_changeType2");
+        Map<String ,Object> type = typeService.getType2ByP2(p2);
+        mav.addObject("type",type);
+        mav.addObject("p1",p1);
+        return mav;
+    }
+
+    @RequestMapping("/changType3Pre")
+    public ModelAndView changType1Pre(int p3,int p2){
+        ModelAndView mav = new ModelAndView("a_changeType3");
+        Map<String ,Object> type = typeService.getType3ByP3(p3);
+        mav.addObject("type",type);
+        mav.addObject("p2",p2);
+        return mav;
+    }
+
+
+
+    @RequestMapping("/updateType1")
+    public ModelAndView updateType1(@RequestParam Map<String,Object> param){
+        ModelAndView mav = new ModelAndView("a_editType1");
+        if(typeService.updateType1(param)){
+            List<Map<String,Object>> list = typeService.getType1();
+            mav.addObject("types",list);
+        }else{
+            mav.addObject("msg","修改失败");
+            mav.setViewName("error");
+        }
+        return mav;
+    }
+
+    @RequestMapping("/updateType2")
+    public ModelAndView updateType2(@RequestParam Map<String,Object> param){
+        ModelAndView mav = new ModelAndView("a_editType2");
+        if(typeService.updateType2(param)){
+            String pp1 = (String) param.get("p1");
+            int p1 = Integer.parseInt(pp1);
+            List<Map<String,Object>> list = typeService.getType2ByP1(p1);
+            mav.addObject("types",list);
+            mav.addObject("p1",p1);
+        }else{
+            mav.addObject("msg","修改失败");
+            mav.setViewName("error");
+        }
+        return mav;
+    }
+
+    @RequestMapping("/updateType3")
+    public ModelAndView updateType3(@RequestParam Map<String,Object> param){
+        ModelAndView mav = new ModelAndView("a_editType3");
+        System.out.println(param);
+        if(typeService.updateType3(param)){
+            String pp2 = (String) param.get("p2");
+            int p2 = Integer.parseInt(pp2);
+            List<Map<String,Object>> list = typeService.getType3Byp2(p2);
+            mav.addObject("types",list);
+            mav.addObject("p2",p2);
+        }else{
+            mav.addObject("msg","修改失败");
+            mav.setViewName("error");
+        }
+        return mav;
+    }
+
+
+
+    @RequestMapping("/getType3Byp2")
+    public ModelAndView getType3Byp2(int p2){
+        ModelAndView mav = new ModelAndView("a_editType3");
+        List<Map<String,Object>> list = typeService.getType3Byp2(p2);
+        mav.addObject("types",list);
+        mav.addObject("p2",p2);
+        return mav;
+    }
+
+    @RequestMapping("/addtype3")
+    public ModelAndView addtype3(String pname,int p2){
+        ModelAndView mav = new ModelAndView("a_editType3");
+        if(typeService.addType3(pname,p2)){
+            List<Map<String,Object>> list = typeService.getType3Byp2(p2);
+            mav.addObject("types",list);
+            mav.addObject("p2",p2);
+        }
+        return mav;
+    }
+    @RequestMapping("/delType2ByP2")
+    public ModelAndView delType2ByP2(int p2,int p1){
+        ModelAndView mav = new ModelAndView("a_editType2");
+        if(typeService.deleteType2ByP2(p2)){
+            List<Map<String,Object>> list = typeService.getType2ByP1(p1);
+            mav.addObject("types",list);
+        }else{
+            mav.addObject("msg","删除失败");
+            mav.setViewName("error");
+        }
+        mav.addObject("p1",p1);
+        return mav;
+    }
+
+    @RequestMapping("/delType3ByP3")
+    public ModelAndView delType3ByP3(int p3,int p2){
+        ModelAndView mav = new ModelAndView("a_editType3");
+        if(typeService.deleteType3ByP3(p3)){
+            List<Map<String,Object>> list = typeService.getType3Byp2(p2);
+            mav.addObject("types",list);
+        }else{
+            mav.addObject("msg","删除失败");
+            mav.setViewName("error");
+        }
+        mav.addObject("p2",p2);
         return mav;
     }
 }

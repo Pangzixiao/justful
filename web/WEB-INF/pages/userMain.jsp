@@ -86,10 +86,10 @@ $(document).ready(function()
               </table></td>
               <td width="150" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td  style="padding-top:15px;"><a href=""><img src="${pageContext.request.contextPath}/images/83.gif" alt="创建简历"  border="0"  /></a></td>
+                  <td  style="padding-top:15px;"><a href="/user/showIntroduce"><img src="${pageContext.request.contextPath}/images/83.gif" alt="创建简历"  border="0"  /></a></td>
                 </tr>
                 <tr>
-                  <td style="padding-top:15px;"><a href=""><img src="${pageContext.request.contextPath}/images/82.gif" alt="管理简历"  border="0"  /></a></td>
+                  <td style="padding-top:15px;"><a href="/user/queryIntroduce"><img src="${pageContext.request.contextPath}/images/82.gif" alt="管理简历"  border="0"  /></a></td>
                 </tr>
               </table></td>
               

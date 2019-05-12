@@ -71,14 +71,14 @@
 							<tr>
 								<td height="50" align="center">
 									<div class="page link_bk">
-										<a href="${pageContext.request.contextPath}/adm/queryCompanys">首页</a>
+										<a href="${pageContext.request.contextPath}/company/queryPositionInfoByCom">首页</a>
 
 										<c:if test="${info.pageNum <= 1}">
 											<a href="javascript:void(0)">上一页</a>
 										</c:if>
 
 										<c:if test="${info.pageNum > 1}">
-											<a href="${pageContext.request.contextPath}/adm/queryCompanys?page=${info.pageNum -1}">上一页</a>
+											<a href="${pageContext.request.contextPath}/company/queryPositionInfoByCom?page=${info.pageNum -1}">上一页</a>
 										</c:if>
 
 										<c:if test="${info.pageNum >= info.pages}">
@@ -86,9 +86,9 @@
 										</c:if>
 
 										<c:if test="${info.pageNum < info.pages}">
-											<a href="${pageContext.request.contextPath}/adm/queryCompanys?page=${info.pageNum +1}">下一页</a>
+											<a href="${pageContext.request.contextPath}/company/queryPositionInfoByCom?page=${info.pageNum +1}">下一页</a>
 										</c:if>
-										<a  href="${pageContext.request.contextPath}/adm/queryCompanys?page=${info.size}">尾页</a>
+										<a  href="${pageContext.request.contextPath}/company/queryPositionInfoByCom?page=${info.size}">尾页</a>
 										<div class="clear"></div>
 									</div>
 								</td>

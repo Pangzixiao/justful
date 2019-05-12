@@ -30,4 +30,6 @@ public interface UserDao {
     int checkUserById(Map<String, Object> m);
 
     List<Map<String,Object>> mutiQueryUsers(Map<String, Object> param);
+
+
 }

@@ -87,7 +87,9 @@ public class CompanyController {
             mav.setViewName("error");
             mav.addObject("msg","修改公司名称失败");
         }
-        mav.addObject("info",param);
+        String company_name = (String ) param.get("company_name");
+        Map<String,Object> info = companyService.queryCompanyByName(company_name);
+        mav.addObject("info",info);
         return mav;
     }
 

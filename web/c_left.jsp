@@ -29,7 +29,7 @@
 </div>
 <div class="left_menu_btop">
 <ul>
-		<li><a href="company/resume_received.jsp">收到的简历</a></li>
+		<li><a href="/company/queryApplyByCom">申请管理</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xzl.dao.ApplyDao;
 import com.xzl.dao.PositionDao;
+import javafx.beans.binding.ObjectExpression;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -61,7 +62,28 @@ public class PositionService {
         return positionDao.outdate(position_id)==1;
     }
 
+
+
+    public PageInfo MutiqueryPosition(Integer page,Map<String, ObjectExpression> param) {
+        PageHelper.startPage(page,3);
+        List<Map<String,Object>> list = positionDao.MutiqueryPosition(param);
+        return new PageInfo<Map<String,Object>>(list);
+    }
+
+    public PageInfo queryPositionByCompanyId(Integer page, int company_id) {
+        PageHelper.startPage(page,3);
+        List<Map<String,Object>> list = positionDao.queryPositionByCompanyId(company_id);
+        return new PageInfo<Map<String,Object>>(list);
+    }
+
+    public boolean addCount(int position_id) {
+        Map<String,Object> m = positionDao.queryPositionById(position_id);
+        int apply_count = (int) m.get("apply_count");
+        m.put("apply_count",apply_count+1);
+        return positionDao.addCount(m)==1;
+    }
+
     public Map<String,Object> selectPositionById(int position_id) {
-        return positionDao.selectPositionById(position_id);
+        return positionDao.queryPositionById(position_id);
     }
 }

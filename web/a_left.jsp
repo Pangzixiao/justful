@@ -23,7 +23,7 @@
 	<div class="admin_left_box">
 		<ul>
 			<li><a href="adm/getIndex"  target="mainFrame">管理中心首页</a></li>
-			<li><a href="" target="mainFrame">职位列表</a></li>
+			<li><a href="adm/type1" target="mainFrame">职位类别列表</a></li>
 			<li><a href="adm/queryCompanys" target="mainFrame">企业列表 </a>
 			<li><a href="adm/queryUsers" target="mainFrame">用户列表 </a></li>
 			<li><a href="common/preChangeUser"  target="mainFrame">修改用户密码 </a></li>
