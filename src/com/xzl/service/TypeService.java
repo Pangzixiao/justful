@@ -92,4 +92,6 @@ public class TypeService {
     public boolean updateType3(Map<String, Object> param) {
         return typeDao.updateType3(param)==1;
     }
+
+
 }

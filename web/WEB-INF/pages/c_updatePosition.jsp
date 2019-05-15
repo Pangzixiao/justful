@@ -10,6 +10,9 @@
 <title>企业会员中心 - 人才系统</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
 <link href="${pageContext.request.contextPath}/styles/user.css" rel="stylesheet" type="text/css" />
+	<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.json-2.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.qrcode.min.js"></script>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -50,21 +53,26 @@
 							</tr>
 							<tr>
 								<td height="30" align="right"><span style="...">*</span>职位类型1:</td>
-								<td><select weitht="200" name="p_type1">
-									<option weitht="200" value="技术">技术</option>
+								<td><select weitht="200" name="p_type1" id="p_type1">
+									<option value="">请选择</option>
+									<option value="">所有</option>
+									<c:forEach items="${types}" var="v">
+										<option  value="${v.p1 }">${v.pname }</option>
+									</c:forEach>
 								</select></td>
 							</tr>
 							<tr>
 								<td height="30" align="right"><span style="...">*</span>职位类型2:</td>
-								<td><select weitht="200" name="p_type2">
-									<option value="后端">后端</option>
+								<td><select weitht="200" name="p_type2" id="p_type2">
+									<option value="">请选择</option>
+									<option value="">所有</option>
 								</select></td>
 							</tr>
 							<tr>
 								<td height="30" align="right"><span style="...">*</span>职位类型3:</td>
-								<td><select weitht="200" name="p_type3">
-									<option value="java">java</option>
-									<option value="全栈">全栈</option>
+								<td><select weitht="200" name="p_type3" id="p_type3">
+									<option value="">请选择</option>
+									<option value="">所有</option>
 								</select></td>
 							</tr>
 							<tr>
@@ -202,5 +210,61 @@
 		</tr>
 	</table>
 	<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+
+
+        $("#p_type1").change(function (){
+            var id1 = $("[name=p_type1]").val()
+
+            /* ajax请求 */
+            $.ajax({
+                url : "/company/type2",
+                type : "post",
+                data : {
+                    "id1" : id1
+                },
+                dataType : "json",
+                success : function(data) {
+                    var str="<option>请选择</option>"
+                    $("#p_type2").html("");
+                    for ( var i = 0; i < data.length; i++) {
+                        str += "<option value='" + data[i].pid
+                            + "'>" + data[i].pname
+                            + "</option>";
+                    }
+                    $("#p_type2").append(str);
+                }
+            });
+
+        });
+
+        $("#p_type2").change(function (){
+            var id2 = $("[name=p_type2]").val()
+
+
+            /* ajax请求 */
+            $.ajax({
+                url : "/company/type3",
+                type : "post",
+                data : {
+                    "id2" : id2
+                },
+                dataType : "json",
+                success : function(data) {
+                    var str="<option>请选择</option>"
+                    $("#p_type3").html("");
+                    for ( var i = 0; i < data.length; i++) {
+                        str += "<option value='" + data[i].pid
+                            + "'>" + data[i].pname
+                            + "</option>";
+                    }
+                    $("#p_type3").append(str);
+                }
+            });
+
+        });
+
+
+	</script>
 </body>
 </html>

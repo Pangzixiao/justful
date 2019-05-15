@@ -10,6 +10,9 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
 <link href="${pageContext.request.contextPath}/styles/common.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/styles/default.css" rel="stylesheet" type="text/css" />
+	<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.json-2.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.qrcode.min.js"></script>
 </head>
 <body>
 
@@ -61,41 +64,24 @@
 					<div class="clear"></div>
 				</div>
 				<div class="list link_lan">
-					类型1<select name="p_type1">
-					<option value="">不限</option>
-					<option value="技术">技术</option>
-					<option value="产品">产品</option>
-					<option value="设计">设计</option>
-					<option value="运营">运营</option>
-					<option value="销售">销售</option>
-					<option value="职能">职能</option>
-					<option value="其他">其他</option>
+					类型1<select weitht="200" name="p_type1" id="p_type1">
+					<option value="">请选择</option>
+					<option value="">所有</option>
+					<c:forEach items="${types}" var="v">
+						<option  value="${v.p1 }">${v.pname }</option>
+					</c:forEach>
 				</select>
 				</div>
 				<div class="list link_lan">
-					类型2<select name="p_type2" >
-					<option value="">不限</option>
-					<option value="前端">前端</option>
-					<option value="后端">后端</option>
-					<option value="DBA">DBA</option>
-					<option value="人工智能">人工智能</option>
-					<option value="测试">测试</option>
-					<option value="运维">运维</option>
-					<option value="高端管理">高端管理</option>
-					<option value="硬件">硬件</option>
-					<option value="其他">其他</option>
+					类型2<select weitht="200" name="p_type2" id="p_type2">
+					<option value="">请选择</option>
+					<option value="">所有</option>
 				</select>
 				</div>
 				<div class="list link_lan">
-					类型3<select name="p_type3" >
-					<option value="">不限</option>
-					<option value="java">java</option>
-					<option value="python">python</option>
-					<option value="全栈">全栈</option>
-					<option value="web前端">web前端</option>
-					<option value="html5">html5</option>
-					<option value="flash">flash</option>
-					<option value="其他">其他</option>
+					类型3<select weitht="200" name="p_type3" id="p_type3">
+					<option value="">请选择</option>
+					<option value="">所有</option>
 				</select>
 				</div>
 				<div class="list link_lan">
@@ -148,5 +134,61 @@
 
 	</div>
 	<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+
+
+        $("#p_type1").change(function (){
+            var id1 = $("[name=p_type1]").val()
+
+            /* ajax请求 */
+            $.ajax({
+                url : "/company/type2",
+                type : "post",
+                data : {
+                    "id1" : id1
+                },
+                dataType : "json",
+                success : function(data) {
+                    var str="<option>请选择</option>"
+                    $("#p_type2").html("");
+                    for ( var i = 0; i < data.length; i++) {
+                        str += "<option value='" + data[i].pid
+                            + "'>" + data[i].pname
+                            + "</option>";
+                    }
+                    $("#p_type2").append(str);
+                }
+            });
+
+        });
+
+        $("#p_type2").change(function (){
+            var id2 = $("[name=p_type2]").val()
+
+
+            /* ajax请求 */
+            $.ajax({
+                url : "/company/type3",
+                type : "post",
+                data : {
+                    "id2" : id2
+                },
+                dataType : "json",
+                success : function(data) {
+                    var str="<option>请选择</option>"
+                    $("#p_type3").html("");
+                    for ( var i = 0; i < data.length; i++) {
+                        str += "<option value='" + data[i].pid
+                            + "'>" + data[i].pname
+                            + "</option>";
+                    }
+                    $("#p_type3").append(str);
+                }
+            });
+
+        });
+
+
+	</script>
 </body>
 </html>

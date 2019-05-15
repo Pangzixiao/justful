@@ -55,9 +55,14 @@ $(".left_menu_bg").click(function(){
 	<div class="left_menu_btop">
 	<ul>
 			<li><a href="/user/selectPositionPre" target="_blank">搜索职位</a></li>
-			<li><a href="/user/showMyApplay">我的申请</a></li>
+			<li><a href="/user/showMyApplay">待处理申请</a></li>
 			<div class="clear"></div>
 	  </ul>
+		<ul>
+			<li><a href="/user/myPassApplay">通过的申请</a></li>
+			<li><a href="/user/myNoPassApplay">被拒的申请</a></li>
+			<div class="clear"></div>
+		</ul>
 	</div>
 </div>
 <div class="left_menu_box" style="border-bottom:1px;">
@@ -68,9 +73,8 @@ $(".left_menu_bg").click(function(){
 	</div>
 	<div class="left_menu_btop">
 	<ul>
-			<li><a href="">个人资料</a></li>
-			<li><a href="">密码修改</a></li>
-			<li><a href="">安全退出</a></li>
+			<li><a href="/u_updateInfo">资料修改</a></li>
+			<li><a href="/user/layout">安全退出</a></li>
 		<div class="clear"></div>
 	  </ul>
 	</div>

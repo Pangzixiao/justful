@@ -75,4 +75,43 @@ public class ApplyService {
         List<Map<String,Object>> list = applyDao.queryApplyByCom(p_cname);
         return new PageInfo<Map<String,Object>>(list);
     }
+
+    public PageInfo queryPassByUserId(HttpSession session, Integer page, String apply_status) {
+        PageHelper.startPage(page,3);
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("position_status",apply_status);
+        String username = (String)session.getAttribute("user_login");
+        Map<String,Object> p = new HashMap<String, Object>();
+        p.put("username",username);
+        Map<String,Object> m  = userDao.queryByName(p);
+        int user_id = (int) m.get("user_id");
+        param.put("user_id",user_id);
+        param.put("apply_status",apply_status);
+        List<Map<String,Object>> list = applyDao.queryPassApplyByUserId(param);
+        return new PageInfo<Map<String,Object>>(list);
+    }
+
+    public PageInfo dealedApplyByCom(Integer page, HttpSession session) {
+        PageHelper.startPage(page,3);
+        Map<String ,Object> param = new HashMap<String, Object>();
+        String p_cname = (String)session.getAttribute("company_login");
+        List<Map<String,Object>> list = applyDao.dealedApplyByCom(p_cname);
+        return new PageInfo<Map<String,Object>>(list);
+    }
+
+    public boolean updateApplay(int apply_id) {
+        return applyDao.updateApplay(apply_id)==1;
+    }
+
+    public boolean mianshi(int apply_id) {
+        return applyDao.mianshi(apply_id)==1;
+    }
+
+    public PageInfo passedApplyByCom(Integer page, HttpSession session) {
+        PageHelper.startPage(page,3);
+        Map<String ,Object> param = new HashMap<String, Object>();
+        String p_cname = (String)session.getAttribute("company_login");
+        List<Map<String,Object>> list = applyDao.passedApplyByCom(p_cname);
+        return new PageInfo<Map<String,Object>>(list);
+    }
 }

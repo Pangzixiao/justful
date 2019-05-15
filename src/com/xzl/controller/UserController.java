@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 @Controller
 @RequestMapping("/user")
@@ -24,6 +25,8 @@ public class UserController {
     CompanyService companyService;
     @Resource
     ApplyService applyService;
+    @Resource
+    TypeService typeService;
 
     @RequestMapping("/regist")
     public ModelAndView regist(@RequestParam Map<String,Object> param, HttpSession session){
@@ -123,6 +126,8 @@ public class UserController {
     @RequestMapping("/selectPositionPre")
     public ModelAndView selectPositionPre(){
         ModelAndView mav = new ModelAndView("u_findPosition");
+        List<Map<String,Object>> types = typeService.getType1();
+        mav.addObject("types",types);
         return mav;
     }
     @RequestMapping("/findPosition")
@@ -191,6 +196,50 @@ public class UserController {
         ModelAndView mav = new ModelAndView("u_showMyApply");
         PageInfo info = applyService.queryByUserId(session,page,position_status);
         mav.addObject("info",info);
+        return mav;
+    }
+    @RequestMapping("/myPassApplay")
+    public ModelAndView myPassApplay(HttpSession session, @RequestParam(required = false,defaultValue = "1") Integer page,
+                                     @RequestParam(required = false,defaultValue = "邀请面试") String apply_status) {
+        ModelAndView mav = new ModelAndView("u_showMyPassApply");
+        PageInfo info = applyService.queryPassByUserId(session, page, apply_status);
+        mav.addObject("info", info);
+        return mav;
+    }
+
+    @RequestMapping("/myNoPassApplay")
+    public ModelAndView myNoPassApplay(HttpSession session, @RequestParam(required = false,defaultValue = "1") Integer page,
+                                     @RequestParam(required = false,defaultValue = "抱歉") String apply_status) {
+        ModelAndView mav = new ModelAndView("u_showMyNoPassApply");
+        PageInfo info = applyService.queryPassByUserId(session, page, apply_status);
+        mav.addObject("info", info);
+        return mav;
+    }
+
+    @RequestMapping("/updatePass")
+    public ModelAndView updatePass(String oldpassword,String password,HttpSession session){
+        ModelAndView mav = new ModelAndView("u_updateInfo");
+        String username = (String)session.getAttribute("user_login");
+        if(username == null || username.equals("")){
+            mav.setViewName("error");
+        }else{
+            Map<String,Object> map  = userService.queryUserByName(username);
+            String pass = (String) map.get("password");
+            if(oldpassword.equals(pass)){
+                boolean b = userService.updatePasswordByName(username,password);
+                mav.setViewName("redirect:/userMain");
+            }else{
+                mav.addObject("msg","用户名或密码错误");
+                mav.setViewName("u_updateInfo");
+            }
+        }
+        return mav;
+    }
+
+    @RequestMapping("/layout")
+    public ModelAndView layout(HttpSession session){
+        ModelAndView mav = new ModelAndView("index");
+        session.removeAttribute("user_login");
         return mav;
     }
 }
