@@ -5,7 +5,7 @@
 <head>
 <base href="${base}" />
 <meta charset="UTF-8" />
-<title>谭岚的个人简历 - 人才系统</title>
+<title>${info.fullname}的个人简历 - 人才系统</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
 <link href="${pageContext.request.contextPath}/styles/common.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/styles/css.css" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
     <td  colspan="5"  bgcolor="#FFFFFF"   class="btit">
 	<div class="qrcode"><img src="${pageContext.request.contextPath}/images/user/url_qrcode.png" alt="二维码"/></div>
 	
-	<h1>谭岚的个人简历</h1>
+	<h1>${info.fullname}的个人简历</h1>
 	<div class="tip">
 			<span style="color: #009900">毕业日期：${info.graduate_date}</span>
 			<br />

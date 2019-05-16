@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="head_top">
 	<div class="head_top_box">
 		<div class="head_top_box_left link_lan">
@@ -41,7 +43,7 @@
 </div>
 <div class="head">
 	<div class="head_logo">
-		<a href=""><img src="images/logo.jpg" alt="人才系统" border="0"
+		<a href=""><img src="${pageContext.request.contextPath}/images/logo.jpg" alt="人才系统" border="0"
 			align="absmiddle" /> </a>
 	</div>
 	<div class="head_logo_right">

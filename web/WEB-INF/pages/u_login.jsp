@@ -8,6 +8,10 @@
 <base href="${base}" />
 <link rel="shortcut icon" href="../../favicon.ico" />
 <link href="${pageContext.request.contextPath}/styles/user.css" rel="stylesheet" type="text/css" />
+	<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/messages_zh.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/additional-methods.js"></script>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -15,7 +19,7 @@
 <div class="login_bg">
 	<div class="login_box">
 			  <div class="login_boxin">
-			<form  action="/user/login"  method="post">
+			<form  id="Formlogin" action="/user/login"  method="post">
 			<div class="tit">我要找工作</div>
 		  <div class="login_err"></div>
 			<table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" >
@@ -61,6 +65,50 @@
   </div>
   <div class="clear"></div>
 </div>
+<script>
+
+    $().ready(function() {
+
+        $("#Formlogin").validate({
+
+            rules: {
+
+                username: {
+
+                    required: true
+
+                },
+                password: {
+
+                    required: true,
+
+                    minlength: 6
+
+                }
+            },
+
+            messages: {
+
+                username: {
+
+                    required: "用户名不能为空"
+
+                },
+                password: {
+
+                    required: "密码不能为空",
+
+                    minlength: "密码长度不能小于3位"
+
+                }
+
+            }
+
+        });
+
+    });
+
+</script>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

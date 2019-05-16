@@ -8,6 +8,10 @@
 <base href="${base}" />
 <link rel="shortcut icon" href="../../favicon.ico" />
 <link href="${pageContext.request.contextPath}/styles/user.css" rel="stylesheet" type="text/css" />
+	<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/messages_zh.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/additional-methods.js"></script>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -61,6 +65,50 @@
   </div>
   <div class="clear"></div>
 </div>
+<script>
+
+    $().ready(function() {
+
+        $("#Formlogin").validate({
+
+            rules: {
+
+                company_name: {
+
+                    required: true
+
+                },
+                c_password: {
+
+                    required: true,
+
+                    minlength: 6
+
+                }
+            },
+
+            messages: {
+
+                company_name: {
+
+                    required: "用户名不能为空"
+
+                },
+                c_password: {
+
+                    required: "密码不能为空",
+
+                    minlength: "密码长度不能小于3位"
+
+                }
+
+            }
+
+        });
+
+    });
+
+</script>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

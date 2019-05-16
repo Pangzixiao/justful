@@ -5,9 +5,9 @@
 <html>
 <head>
 <base href="${base}" />
-<link rel="shortcut icon" href="favicon.ico" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
 <title>网站后台管理中心</title>
-<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/styles/common.css" rel="stylesheet" type="text/css" />
 </head>
 </head>
 <frameset rows="70,*" frameborder="no" border="0" framespacing="0" >

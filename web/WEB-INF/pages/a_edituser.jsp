@@ -81,13 +81,13 @@
   </table>
 
     <div class="page link_bk">
-		<a href="${pageContext.request.contextPath}/adm/queryUsers">首页</a>
+		<a href="${pageContext.request.contextPath}/adm/mutilqueryUsers?check_type=${check_type}&username=${username}">首页</a>
 		<c:if test="${info.pageNum <= 1}">
 			<a href="javascript:void(0)">上一页</a>
 		</c:if>
 
 		<c:if test="${info.pageNum > 1}">
-			<a href="${pageContext.request.contextPath}/adm/queryUsers?page=${info.pageNum -1}">上一页</a>
+			<a href="${pageContext.request.contextPath}/adm/mutilqueryUsers?page=${info.pageNum -1}&check_type=${check_type}&username=${username}">上一页</a>
 		</c:if>
 
 		<c:if test="${info.pageNum >= info.pages}">
@@ -95,9 +95,9 @@
 		</c:if>
 
 		<c:if test="${info.pageNum < info.pages}">
-			<a href="${pageContext.request.contextPath}/adm/queryUsers?page=${info.pageNum +1}">下一页</a>
+			<a href="${pageContext.request.contextPath}/adm/mutilqueryUsers?page=${info.pageNum +1}&check_type=${check_type}&username=${username}">下一页</a>
 		</c:if>
-		<a  href="${pageContext.request.contextPath}/adm/queryUsers?page=${info.pages}">尾页</a>
+		<a  href="${pageContext.request.contextPath}/adm/mutilqueryUsers?page=${info.pages}&check_type=${check_type}&username=${username}">尾页</a>
 	</div>
 </div>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>

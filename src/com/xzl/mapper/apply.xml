@@ -12,6 +12,18 @@
         values(#{position_id},#{user_id},#{apply_status},#{apply_date},#{position_status})
     </insert>
 
+    <select id="queryApplyByCom" resultType="java.util.Map">
+        select a.* , p.p_name,p.p_cname,p.salary,p.p_address from t_apply a left outer join  t_position p on a.position_id = p.position_id
+        <where>
+            <if test=" p_cname != null and p_cname!=''">
+                and p_cname = #{p_cname}
+            </if>
+            <if test=" apply_status != null and apply_status !=''">
+                and a.apply_status=#{apply_status}
+            </if>
+                and position_status='有效'
+        </where>
+    </select>
 
 
 </mapper>

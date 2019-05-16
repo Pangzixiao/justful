@@ -34,7 +34,7 @@
 					<td>&nbsp;</td>
 					<td height="50"><input type="button" name="Submit" id="login"
 						class="but100" value="免费注册"
-						onclick="window.location='../../c_regist.jsp'" />
+						onclick="window.location='/c_regist'" />
 					</td>
 				</tr>
 			</table>
@@ -56,7 +56,7 @@
 					<td>&nbsp;</td>
 					<td height="50"><input type="button" name="Submit" id="login"
 						class="but100" value="免费注册"
-						onclick="window.location='../../u_regist.jsp'" />
+						onclick="window.location='/u_regist'" />
 					</td>
 				</tr>
 			</table>

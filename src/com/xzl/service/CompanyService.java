@@ -88,4 +88,11 @@ public class CompanyService {
     public boolean changeCompanyPass(Map<String, Object> param) {
         return companyDao.changeCompanyPass(param) == 1;
     }
+
+    public boolean updatePasswordByName(String company_name, String password) {
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("company_name",company_name);
+        param.put("c_password",password);
+        return companyDao.changeCompanyPass(param)==1;
+    }
 }

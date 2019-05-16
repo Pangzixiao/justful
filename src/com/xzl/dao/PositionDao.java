@@ -11,8 +11,7 @@ import java.util.Map;
 
 @Component
 public interface PositionDao {
-    @Select("select p.* ,c.company_name from t_position  p left outer join  t_company c on p.company_id = c.company_id where c.company_name=#{company_name}")
-    List<Map<String,Object>> queryPositionInfoByCom(String company_name);
+    List<Map<String,Object>> queryPositionInfoByCom(Map<String,Object> param);
 
     int newPosition(Map<String, Object> param);
     @Select("select p.* ,c.company_name,c.check_type,c.c_scale,c.c_address,c.c_type from t_position  p left outer join  t_company c on p.company_id = c.company_id where p.position_id = #{position_id}")

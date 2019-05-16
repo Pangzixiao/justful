@@ -8,6 +8,10 @@
 <base href="${base}" />
 <link rel="shortcut icon" href="../../favicon.ico" />
 <link href="${pageContext.request.contextPath}/styles/user.css" rel="stylesheet" type="text/css" />
+    <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/validation/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/validation/messages_zh.js"></script>
+    <script src="${pageContext.request.contextPath}/js/validation/additional-methods.js"></script>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -20,7 +24,7 @@
 		  <div class="login_err"></div>
 			<table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" >
 			 
-			<tr><td width="55" align="right" id="account">帐号：</td>
+			<tr><td width="55" align="right" id="account">帐号：</td>${msg}
 			<td>
 			  <input name="username" type="text"  class="login_input" id="username"   maxlength="30" value="用户名" style="color:#999999"/>    </td>
 		  </tr>
@@ -58,6 +62,50 @@
   </div>
   <div class="clear"></div>
 </div>
+<script>
+
+    $().ready(function() {
+
+        $("#Formlogin").validate({
+
+            rules: {
+
+                username: {
+
+                    required: true
+
+                },
+                password: {
+
+                    required: true,
+
+                    minlength: 6
+
+                }
+            },
+
+            messages: {
+
+                username: {
+
+                    required: "用户名不能为空"
+
+                },
+                password: {
+
+                    required: "密码不能为空",
+
+                    minlength: "密码长度不能小于6位"
+
+                }
+
+            }
+
+        });
+
+    });
+
+</script>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

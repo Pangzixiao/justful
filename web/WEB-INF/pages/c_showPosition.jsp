@@ -16,7 +16,7 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <!--导航 -->
 <div class="floatnav">
- <jsp:include page="${pageContext.request.contextPath}/nav.jsp"></jsp:include>
+ <jsp:include page="${pageContext.request.contextPath}/c_nav.jsp"></jsp:include>
 </div>
 <!--导航end -->
 <div class="page_location link_bk">
@@ -96,7 +96,6 @@
 	</div>
   <div class="clear"></div>
 </div>
-<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>
 

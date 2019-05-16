@@ -29,9 +29,8 @@
 </div>
 <div class="left_menu_btop">
 <ul>
-	<li><a href="/company/queryApplyByCom">待处理申请</a></li>
-	<li><a href="/company/dealedApplyByCom">已处理申请</a></li>
-	<li><a href="/company/passedApplyByCom">面试名单</a></li>
+	<li><a href="/company/queryApplyByCom">申请管理</a></li>
+	<li><a href="/company/mianshi">面试名单</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
@@ -59,8 +58,8 @@
 	</div>
 	<div class="left_menu_btop">
 		<ul>
-		<li><a href="">密码修改</a></li>
-		<li><a href="">安全退出</a></li>
+		<li><a href="/c_changePass">密码修改</a></li>
+		<li><a href="/company/layout">安全退出</a></li>
 		<div class="clear"></div>
 		</ul>
 	</div>

@@ -71,7 +71,7 @@
 
 						<div class="seh">
 							<div class="keybox">
-								<input name="key" type="text" value="" />
+								<input name="company_name" type="text" value="" />
 							</div>
 							<div class="selbox">
 								<input name="key_type_cn" id="key_type_cn" type="text"
@@ -88,14 +88,14 @@
 			</tr>
 		</table>
 		<div class="page link_bk">
-			<a href="${pageContext.request.contextPath}/adm/queryCompanys">首页</a>
+			<a href="${pageContext.request.contextPath}/adm/mutiQueryCompany?check_type=${check_type}&company_name=${company_name}">首页</a>
 
 			<c:if test="${info.pageNum <= 1}">
 				<a href="javascript:void(0)">上一页</a>
 			</c:if>
 
 			<c:if test="${info.pageNum > 1}">
-				<a href="${pageContext.request.contextPath}/adm/queryCompanys?page=${info.pageNum -1}">上一页</a>
+				<a href="${pageContext.request.contextPath}/adm/mutiQueryCompany?page=${info.pageNum -1}&check_type=${check_type}&company_name=${company_name}">上一页</a>
 			</c:if>
 
 			<c:if test="${info.pageNum >= info.pages}">
@@ -103,9 +103,9 @@
 			</c:if>
 
 			<c:if test="${info.pageNum < info.pages}">
-				<a href="${pageContext.request.contextPath}/adm/queryCompanys?page=${info.pageNum +1}">下一页</a>
+				<a href="${pageContext.request.contextPath}/adm/mutiQueryCompany?page=${info.pageNum +1}&check_type=${check_type}&company_name=${company_name}">下一页</a>
 			</c:if>
-			<a  href="${pageContext.request.contextPath}/adm/queryCompanys?page=${info.size}">尾页</a>
+			<a  href="${pageContext.request.contextPath}/adm/mutiQueryCompany?page=${info.size}&check_type=${check_type}&company_name=${company_name}">尾页</a>
 			<div class="clear"></div>
 		</div>
 	</div>

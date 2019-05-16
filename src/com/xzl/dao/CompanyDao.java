@@ -30,4 +30,5 @@ public interface CompanyDao {
 
     @Update("update t_company set c_password = #{c_password} where company_name=#{company_name}")
     int changeCompanyPass(Map<String, Object> param);
+
 }

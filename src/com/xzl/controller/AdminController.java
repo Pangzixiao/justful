@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class AdminController {
         ModelAndView mav = new ModelAndView("adminMain");
         boolean b = admService.login(param);
         if(!b){
-            mav.setViewName("redirect:a_login");
+            mav.setViewName("a_login");
             mav.addObject("msg","用户名错误或密码错误");
         }else{
             session.setAttribute("admin_login",param.get("username"));
@@ -134,18 +135,28 @@ public class AdminController {
     }
 
     @RequestMapping("/mutilqueryUsers")
-    public ModelAndView mutilqueryUsers(@RequestParam(required = false,defaultValue = "1") Integer page,@RequestParam Map<String,Object>param){
+    public ModelAndView mutilqueryUsers(@RequestParam(required = false,defaultValue = "1") Integer page,@RequestParam(required = false,defaultValue = "") String check_type,@RequestParam(required = false,defaultValue = "")String username){
         ModelAndView mav = new ModelAndView("a_edituser");
+        HashMap<String,Object> param = new HashMap<String, Object>();
+        param.put("username",username);
+        param.put("check_type",check_type);
         PageInfo info = userService.mutilqueryUsers(page,param);
         mav.addObject("info",info);
+        mav.addObject("check_type",check_type);
+        mav.addObject("username",username);
         return mav;
     }
 
     @RequestMapping("/mutiQueryCompany")
-    public ModelAndView queryCompanys(@RequestParam(required = false,defaultValue = "1") Integer page,@RequestParam Map<String,Object>param){
+    public ModelAndView queryCompanys(@RequestParam(required = false,defaultValue = "1") Integer page,@RequestParam(required = false,defaultValue = "") String check_type,@RequestParam(required = false,defaultValue = "")String company_name){
         ModelAndView mav = new ModelAndView("a_editCompany");
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("company_name",company_name);
+        param.put("check_type",check_type);
         PageInfo info = companyService.mutiQueryCompany(page,param);
         mav.addObject("info",info);
+        mav.addObject("check_type",check_type);
+        mav.addObject("company_name",company_name);
         return mav;
     }
 
@@ -366,6 +377,36 @@ public class AdminController {
             mav.setViewName("error");
         }
         mav.addObject("p2",p2);
+        return mav;
+    }
+
+    @RequestMapping("/checkCompany")
+    public ModelAndView checkCompany(@RequestParam(required = false,defaultValue = "1") Integer page){
+        ModelAndView mav = new ModelAndView("a_editCompany");
+        Map<String,Object> param = new HashMap<String, Object>();
+        String check_type = "未审批";
+        param.put("check_type",check_type);
+        PageInfo info = companyService.mutiQueryCompany(page,param);
+        mav.addObject("info",info);
+        mav.addObject("check_type",check_type);
+        return mav;
+    }
+
+    @RequestMapping("/checkusers")
+    public ModelAndView checkusers(@RequestParam(required = false,defaultValue = "1") Integer page){
+        ModelAndView mav = new ModelAndView("a_edituser");
+        Map<String,Object> param = new HashMap<String, Object>();
+        String check_type = "未审核";
+        param.put("check_type",check_type);
+        PageInfo info = userService.mutilqueryUsers(page,param);
+        mav.addObject("info",info);
+        mav.addObject("check_type",check_type);
+        return mav;
+    }
+    @RequestMapping("/layout")
+    public ModelAndView layout(HttpSession session){
+        ModelAndView mav = new ModelAndView("index");
+        session.removeAttribute("admin_login");
         return mav;
     }
 }

@@ -3,16 +3,13 @@ package com.xzl.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xzl.dao.ApplyDao;
-import com.xzl.dao.CompanyDao;
+import com.xzl.dao.IntroduceDao;
 import com.xzl.dao.UserDao;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ApplyService {
@@ -23,7 +20,7 @@ public class ApplyService {
     @Resource
     PositionService positionService;
     @Resource
-    CompanyDao companyDao;
+    IntroduceDao introduceDao;
 
     public boolean applyPositionById(HttpSession session,int position_id) {
         String username = (String)session.getAttribute("user_login");
@@ -68,12 +65,49 @@ public class ApplyService {
         return new PageInfo<Map<String,Object>>(list);
     }
 
-    public PageInfo queryApplyByCom(Integer page,HttpSession session) {
+    public PageInfo queryApplyByCom(Integer page,HttpSession session,String apply_status) {
         PageHelper.startPage(page,3);
         Map<String ,Object> param = new HashMap<String, Object>();
         String p_cname = (String)session.getAttribute("company_login");
-        List<Map<String,Object>> list = applyDao.queryApplyByCom(p_cname);
+        param.put("p_cname",p_cname);
+        param.put("apply_status",apply_status);
+        List<Map<String,Object>> list = applyDao.queryApplyByCom(param);
         return new PageInfo<Map<String,Object>>(list);
+    }
+
+    public List<Map<String,Object>> queryApplyByCom(HttpSession session) {
+        String p_cname = (String)session.getAttribute("company_login");
+        List<Map<String,Object>> apply = applyDao.queryApplyByComs(p_cname);
+        List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
+        for(Map<String,Object> m : apply){
+            int user_id = (int)m.get("user_id");
+            List<Map<String , Object>> intrs = introduceDao.queryIntroducesByid(user_id);
+            if(!intrs.isEmpty()){
+                Map<String,Object> intr = intrs.get(0);
+                String fullname = (String)intr.get("fullname");
+                String school = (String) intr.get("school");
+                String major = (String) intr.get("major");
+                String sex = (String) intr.get("sex");
+                String now_address = (String)intr.get("now_address");
+                m.put("fullname",fullname);
+                m.put("school",school);
+                m.put("major",major);
+                m.put("sex",sex);
+                m.put("now_address",now_address);
+            }
+
+            Map<String , Object> user = userDao.queryUserById(user_id);
+            if(!user.isEmpty()){
+                String username = (String)user.get("username");
+                String tel = (String)user.get("tel");
+
+                m.put("username",username);
+                m.put("tel",tel);
+            }
+
+            list.add(m);
+        }
+        return list;
     }
 
     public PageInfo queryPassByUserId(HttpSession session, Integer page, String apply_status) {

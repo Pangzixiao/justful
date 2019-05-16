@@ -21,10 +21,10 @@
 <div class="toptit">待处理事务</div>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="link_lan" style="padding-left:15px; line-height:220%; margin-bottom:10px; color:#666666">
       <tr>
-        <td width="300"  >待审核职位：&nbsp;<a href="" id="t1">...</a></td>
+        <td width="300"  >待审核用户：&nbsp;<a href="/adm/checkusers" id="t1">...</a></td>
       </tr>
       <tr>
-        <td  >待认证企业：&nbsp;<a href="" id="t3">...</a></td>
+        <td  >待认证企业：&nbsp;<a href="/adm/checkCompany" id="t3">...</a></td>
 
       </tr>
 
@@ -66,6 +66,5 @@
   </tr>
 </table>
 </div>
-<jsp:include page="${pageContext.request.contextPath}/a_footer.jsp" />
 </body>
 </html>

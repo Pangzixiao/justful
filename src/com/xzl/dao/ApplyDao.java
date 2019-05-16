@@ -22,8 +22,7 @@ public interface ApplyDao {
     @Select("select a.* , p.p_name,p.p_cname,p.salary,p.p_address from t_apply a left outer join  t_position p on a.position_id = p.position_id where a.position_id = #{position_id} and a.position_status='有效'")
     List<Map<String,Object>> queryApplyByPosition(int position_id);
 
-    @Select("select a.* , p.p_name,p.p_cname,p.salary,p.p_address from t_apply a left outer join  t_position p on a.position_id = p.position_id where p.p_cname = #{p_cname} and a.position_status='有效' and a.apply_status='已申请'")
-    List<Map<String,Object>> queryApplyByCom(String p_cname);
+    List<Map<String,Object>> queryApplyByCom(Map<String, Object> p_cname);
 
     @Select("select a.* , p.p_name,p.p_cname,p.salary,p.p_address ,p.company_id from t_apply a left outer join  t_position p on a.position_id = p.position_id where a.user_id = #{user_id} and a.apply_status=#{apply_status} and a.position_status='有效'")
     List<Map<String,Object>> queryPassApplyByUserId(Map<String, Object> param);
@@ -39,4 +38,10 @@ public interface ApplyDao {
 
     @Select("select a.* , p.p_name,p.p_cname,p.salary,p.p_address from t_apply a left outer join  t_position p on a.position_id = p.position_id where p.p_cname = #{p_cname} and a.position_status='有效' and a.apply_status='邀请面试'")
     List<Map<String,Object>> passedApplyByCom(String p_cname);
+
+    @Update("update t_apply set position_status='失效' where apply_id = #{apply_id} " )
+    int updatePosition_status(int apply_id);
+
+    @Select("select a.* , p.p_name,p.salary,p.p_address from t_apply a left outer join  t_position p on a.position_id = p.position_id where p.p_cname = #{p_cname} and a.position_status='有效' and a.apply_status='邀请面试' order by position_id")
+    List<Map<String,Object>> queryApplyByComs(String p_cname);
 }

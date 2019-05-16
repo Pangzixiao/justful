@@ -12,18 +12,18 @@
 <body>
 <div class="admin_top_bg">
     <table width="980" height="70" border="0" cellpadding="0" cellspacing="0">
-        <tr><td width="200" rowspan="2" align="right" valign="middle" ><div align="center"><img src="" width="160" height="25" /></div>
+        <tr><td width="200" rowspan="2" align="right" valign="middle" >
 		</td>
           <td height="39" align="right" valign="middle" class="link_w">
 		  欢迎超级管理员：<strong style="color: #99FF00">admin</strong>&nbsp; 登录&nbsp;&nbsp;&nbsp;&nbsp;  
-		  <a href="" target="_top">[退出]</a>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
-		  <a href="" target="_blank">网站首页</a>
+		  <a href="/adm/layout" target="_top">[退出]</a>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
 		  </td>
         </tr>
         <tr>
           <td height="31" valign="bottom" class="admin_top_nav">
-		  <a href="adm/getIndex" class="select" target="mainFrame">首页</a>
-		  <a href="" target="mainFrame" id="company">职位</a>
+		  <a href="adm/getIndex"  target="mainFrame">首页</a>
+		  <a href="adm/type1" target="mainFrame" id="company">职位</a>
 		  <a href="adm/queryCompanys" target="mainFrame" id="personal">企业</a>
 		  <a href="adm/queryUsers" target="mainFrame" id="feedback">用户</a>
 		  <a href="common/preChangeUser" target="mainFrame" id="users">修改用户密码</a>

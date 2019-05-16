@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,12 @@ public class PositionService {
     @Resource
     ApplyDao applyDao;
 
-    public PageInfo queryPositionInfoByCom(Integer page, String company_name) {
+    public PageInfo queryPositionInfoByCom(Integer page, String company_name ,String p_state) {
         PageHelper.startPage(page,3);
-        List<Map<String,Object>> list = positionDao.queryPositionInfoByCom(company_name);
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("company_name",company_name);
+        param.put("p_state",p_state);
+        List<Map<String,Object>> list = positionDao.queryPositionInfoByCom(param);
         return new PageInfo<Map<String,Object>>(list);
     }
 
@@ -59,7 +63,13 @@ public class PositionService {
 
     public boolean outdate(int position_id) {
 
-        return positionDao.outdate(position_id)==1;
+        boolean b = positionDao.outdate(position_id)==1;
+        List<Map<String,Object>> list = applyDao.queryApplyByPosition(position_id);
+        for(Map<String,Object> map:list){
+            int apply_id =  (int)map.get("apply_id");
+            applyDao.updatePosition_status(apply_id);
+        }
+        return b;
     }
 
 

@@ -30,10 +30,10 @@ public class UserController {
 
     @RequestMapping("/regist")
     public ModelAndView regist(@RequestParam Map<String,Object> param, HttpSession session){
-        ModelAndView mav = new ModelAndView("redirect:/u_login");
+        ModelAndView mav = new ModelAndView("/u_login");
         boolean b = userService.regist(param);
         if( !b ){
-            mav.setViewName("/register");
+            mav.setViewName("/u_regist");
             mav.addObject("msg","用户名已存在");
         }
 
@@ -222,6 +222,7 @@ public class UserController {
         String username = (String)session.getAttribute("user_login");
         if(username == null || username.equals("")){
             mav.setViewName("error");
+            mav.addObject("msg","请先登录");
         }else{
             Map<String,Object> map  = userService.queryUserByName(username);
             String pass = (String) map.get("password");

@@ -1,22 +1,18 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <base href="${base}" />
 <meta charset="UTF-8" />
-<link rel="shortcut icon" href="favicon.ico" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/avicon.ico" />
 <title>Powered by gxaedu</title>
-<link href="admin/styles/common.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/admin/styles/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("li").first().addClass("hover");
-		$("li>a").click(function() {
-			$("li").removeClass("hover");
-			$(this).parent().addClass("hover");
-			$(this).blur();
-		})
-	})
+
+
 </script>
 </head>
 <body>

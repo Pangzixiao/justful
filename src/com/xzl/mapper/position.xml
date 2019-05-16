@@ -43,4 +43,18 @@
             and p_state='有效'
         </where>
     </select>
+
+    <select id="queryPositionInfoByCom" resultType="java.util.HashMap">
+        select p.* ,c.company_name from t_position  p left outer join  t_company c on p.company_id = c.company_id
+        <where>
+            <if test="company_name != null and company_name !=''">
+                and c.company_name=#{company_name}
+            </if>
+
+            <if test="p_state != null and p_state !=''">
+                and p.p_state=#{p_state}
+            </if>
+
+        </where>
+    </select>
 </mapper>
