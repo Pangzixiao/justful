@@ -23,7 +23,7 @@
 			<div class="tit">我要找工作</div>
 		  <div class="login_err"></div>
 			<table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" >
-			 
+			 ${msg}
 			<tr><td width="55" align="right" id="account">帐号：</td>
 			<td>
 			  <input name="username" type="text"    maxlength="30" value="用户名" style="color:#999999"/>    </td>

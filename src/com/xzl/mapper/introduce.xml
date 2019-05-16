@@ -10,16 +10,17 @@
     <insert id="addIntroduce" >
         insert into t_introduce (user_id,u_address,nation,degree,school,major,graduate_date,work_age,u_describe
         ,job_want,min_wage,max_wage,city_want,now_state,birthday,height,marriage,phone,sex,old_cname,oldjob,fullname
-        ,website,now_address)values(#{user_id},#{u_address},#{nation},#{degree},#{school},#{major},#{graduate_date}
+        ,website,now_address,work_end,study_start,work_start)values(#{user_id},#{u_address},#{nation},#{degree},#{school},#{major},#{graduate_date}
         ,#{work_age},#{u_describe},#{job_want},#{min_wage},#{max_wage},#{city_want},#{now_state},#{birthday},#{height}
-        ,#{marriage},#{phone},#{sex},#{old_cname},#{oldjob},#{fullname},#{website},#{now_address})
+        ,#{marriage},#{phone},#{sex},#{old_cname},#{oldjob},#{fullname},#{website},#{now_address},#{work_end},#{study_start},#{work_start})
     </insert>
 
     <update id="updateIntroduceById">
-        update t_introduce set u_address = #{u_address},nation=#{nation},degree=#{degress},school=#{school},
+        update t_introduce set u_address = #{u_address},nation=#{nation},degree=#{degree},school=#{school},
         major=#{major},graduate_date=#{graduate_date},work_age=#{work_age},u_describe=#{u_describe},job_want=#{job_want},
         min_wage=#{min_wage},max_wage=#{max_wage},city_want=#{city_want},now_state=#{now_state},birthday=#{birthday},
         height=#{height},marriage=#{marriage},phone=#{phone},sex=#{sex},old_cname=#{old_cname},oldjob=#{oldjob},
-        fullname=#{fullname},website=#{website},now_address=#{now_address} where user_id = #{user_id}
+        fullname=#{fullname},website=#{website},now_address=#{now_address},work_end=#{work_end},
+        study_start=#{study_start},work_start=#{work_start} where user_id = #{user_id}
     </update>
 </mapper>

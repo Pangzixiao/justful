@@ -56,7 +56,7 @@ public class UserController {
         ModelAndView mav = new ModelAndView("userMain");
         boolean b = userService.login(param);
         if(!b){
-            mav.setViewName("redirect:login");
+            mav.setViewName("/u_login");
             mav.addObject("msg","用户名错误或密码错误");
         }else{
             session.setAttribute("user_login",param.get("username"));

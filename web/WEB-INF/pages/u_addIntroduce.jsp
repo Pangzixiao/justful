@@ -5,11 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${base}" />
-<meta charset="UTF-8" />
-<title>我的简历 - 个人会员中心 - 人才系统</title>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
-<link href="${pageContext.request.contextPath}/styles/user.css" rel="stylesheet" type="text/css" />
+	<base href="${base}" />
+	<meta charset="UTF-8" />
+	<title>我的简历 - 个人会员中心 - 人才系统</title>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" />
+	<link href="${pageContext.request.contextPath}/styles/user.css" rel="stylesheet" type="text/css" />
+	<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/messages_zh.js"></script>
+	<script src="${pageContext.request.contextPath}/js/validation/additional-methods.js"></script>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -82,16 +86,10 @@
 												style="color:#FF0000">*</strong>出生年份：</td>
 											<td><input name="birthday" type="date"
 												class="input_text_200 date_input"  maxlength="18"
-												value="" /> <span style="color:#666666">(如：2003年8月)</span></td>
-										</tr>
-										
-										<tr>
-											<td height="23" align="right"><strong
-												style="color:#FF0000">*</strong>毕业年份：</td>
-											<td><input name="graduate_date" type="date"
-												class="input_text_200 date_input"  maxlength="18"
 												value="" /> </td>
 										</tr>
+										
+
 										
 										
 										<tr>
@@ -173,6 +171,22 @@
 												class="input_text_200"  maxlength="30" value="" />
 											</td>
 										</tr>
+
+										<tr>
+											<td height="23" align="right"><strong
+													style="color:#FF0000">*</strong>开学日期：</td>
+											<td><input name="study_start" type="date"
+													   class="input_text_200 date_input"  maxlength="18"
+													   value="" /> </td>
+										</tr>
+
+										<tr>
+											<td height="23" align="right"><strong
+													style="color:#FF0000">*</strong>毕业日期：</td>
+											<td><input name="graduate_date" type="date"
+													   class="input_text_200 date_input"  maxlength="18"
+													   value="" /> </td>
+										</tr>
 										
 										<tr>
 											<td height="23" align="right"><strong
@@ -204,6 +218,22 @@
 											<td><input name="oldjob" type="text"
 												class="input_text_200"  maxlength="30" value="" />
 											</td>
+										</tr>
+
+										<tr>
+											<td height="23" align="right"><strong
+													style="color:#FF0000">*</strong>工作起始日期：</td>
+											<td><input name="work_start" type="date"
+													   class="input_text_200 date_input"  maxlength="18"
+													   value="" /> </td>
+										</tr>
+
+										<tr>
+											<td height="23" align="right"><strong
+													style="color:#FF0000">*</strong>工作结束日期：</td>
+											<td><input name="work_end" type="date"
+													   class="input_text_200 date_input"  maxlength="18"
+													   value="" /> </td>
 										</tr>
 										
 										<tr>
@@ -282,6 +312,167 @@
 			</td>
 		</tr>
 	</table>
-	<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+	<script>
+        jQuery.validator.addMethod("isPhone", function(value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "phone is error");
+
+        $().ready(function() {
+            $("#Form1").validate({
+
+                rules: {
+                    fullname:{
+                        required:true
+                    },
+                    nation:{
+                        required:true
+                    },
+                    birthday:{
+                        required:true
+                    },
+                    height:{
+                        required:true,
+                        digits:true
+                    },
+                    work_age:{
+                        required:true
+                    },
+                    u_address:{
+                        required:true
+                    },
+                    now_address:{
+                        required:true
+                    },
+                    degree:{
+                        required:true
+                    },
+                    school:{
+                        required:true
+                    },
+                    major:{
+                        required:true
+                    },
+                    study_start:{
+                        required:true
+                    },
+                    graduate_date:{
+                        required:true
+                    },
+                    phone:{
+                        isPhone:true
+                    },
+                    website:{
+                        required:true,
+                        url:true
+                    },
+                    old_cname:{
+                        required:true
+                    },
+                    oldjob:{
+                        required:true
+                    },
+                    work_start:{
+                        required:true
+                    },
+                    work_end:{
+                        required:true
+                    },
+                    job_want:{
+                        required:true
+                    },
+                    city_want:{
+                        required:true
+                    },
+                    min_wage:{
+                        required:true
+                    },
+                    max_wage:{
+                        required:true
+                    },
+                    now_state:{
+                        required:true
+                    }
+                },
+
+                messages: {
+                    fullname:{
+                        required:"请输入真实姓名"
+                    },
+                    nation:{
+                        required:"请输入民族"
+                    },
+                    birthday:{
+                        required:"日期不能为空"
+                    },
+                    height:{
+                        required:"身高不能为空",
+                        digits:"请输入整数"
+                    },
+                    work_age:{
+                        required:"该选项不能为空"
+                    },
+                    u_address:{
+                        required:"该选项不能为空"
+                    },
+                    now_address:{
+                        required:"该选项不能为空"
+                    },
+                    degree:{
+                        required:"该选项不能为空"
+                    },
+                    school:{
+                        required:"该选项不能为空"
+                    },
+                    major:{
+                        required:"该选项不能为空"
+                    },
+                    study_start:{
+                        required:"该选项不能为空"
+                    },
+                    graduate_date:{
+                        required:"该选项不能为空"
+                    },
+                    phone:{
+                        isPhone:"请输入正确的手机号"
+                    },
+                    website:{
+                        url:"请输入正确的网站格式"
+                    },
+                    old_cname:{
+                        required:"没有请填无"
+                    },
+                    oldjob:{
+                        required:"没有请填无"
+                    },
+                    work_start:{
+                        required:"该选项不能为空"
+                    },
+                    work_end:{
+                        required:"该选项不能为空"
+                    },
+                    job_want:{
+                        required:"请输入期望的职位"
+                    },
+                    city_want:{
+                        required:"请输入理想城市"
+                    },
+                    min_wage:{
+                        required:"该选项不能为空"
+                    },
+                    max_wage:{
+                        required:"该选项不能为空"
+                    },
+                    now_state:{
+                        required:"该选项不能为空"
+                    }
+
+                }
+
+            });
+
+        });
+	</script>
 </body>
 </html>
