@@ -17,14 +17,8 @@
 <body>
 
 	<jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
-	<!--导航 -->
-	<div class="floatnav">
-		<jsp:include page="${pageContext.request.contextPath}/nav.jsp"></jsp:include>
-	</div>
-	<!--导航end -->
-	<div class="page_location link_bk">
 
-	</div>
+
 	<form method="post" action="/user/findPosition">
 	<div class="d1">
 		<div class="left">
@@ -39,7 +33,7 @@
 					<div class="left">
 						<div class="keybox">
 							<div class="keyinputbox">
-								<input name="key" type="text" id="index-search-key"
+								<input name="p_name" type="text" id="index-search-key"
 									maxlength="25" value="" style="color: #CCCCCC" />
 							</div>
 							<div class="subinputbox">
@@ -64,8 +58,9 @@
 					<div class="clear"></div>
 				</div>
 				<div class="list link_lan">
-					类型1<select weitht="200" name="p_type1" id="p_type1">
-					<option value="">请选择</option>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一级行业&nbsp;&nbsp;&nbsp;：
+					<select style="width: 200px" name="p_type1" id="p_type1">
+					<option value="">--请选择--</option>
 					<option value="">所有</option>
 					<c:forEach items="${types}" var="v">
 						<option  value="${v.p1 }">${v.pname }</option>
@@ -73,19 +68,23 @@
 				</select>
 				</div>
 				<div class="list link_lan">
-					类型2<select weitht="200" name="p_type2" id="p_type2">
-					<option value="">请选择</option>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二级行业&nbsp;&nbsp;&nbsp;：
+					<select style="width: 200px" name="p_type2" id="p_type2">
+						<option value="">--请选择--</option>
+						<option value="">所有</option>
+					</select>
+				</div>
+				<div class="list link_lan">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三级行业&nbsp;&nbsp;&nbsp;：
+					<select style="width: 200px" name="p_type3" id="p_type3">
+					<option value="">--请选择--</option>
 					<option value="">所有</option>
 				</select>
 				</div>
 				<div class="list link_lan">
-					类型3<select weitht="200" name="p_type3" id="p_type3">
-					<option value="">请选择</option>
-					<option value="">所有</option>
-				</select>
-				</div>
-				<div class="list link_lan">
-					工作地点<select name="p_address" >
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工作地点&nbsp;&nbsp;&nbsp;：
+					<select style="width: 200px" name="p_address" >
+					<option value="">--请选择--</option>
 					<option value="">不限</option>
 					<option value="北京">北京</option>
 					<option value="上海">上海</option>
@@ -94,7 +93,9 @@
 				</select>
 				</div>
 				<div class="list link_lan">
-					工作经验<select name="required_work" >
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工作经验&nbsp;&nbsp;&nbsp;：
+					<select style="width: 200px" name="required_work" >
+					<option value="">--请选择--</option>
 					<option value="">不限</option>
 					<option value="无要求">无要求</option>
 					<option value="有经验">有经验</option>
@@ -104,36 +105,7 @@
 		</div>
 	</div>
 	</form>
-	<div class="d3">
-		<div class="left">
-			<div class="box">
-				<div class="tit">
-					<div class="tbox">
-						<strong>推荐职位</strong>
-					</div>
 
-					<div class="clear"></div>
-					<c:forEach begin="1" end="24">
-						<div class="list link_lan">
-							<a href="company/comp_view.jsp" target="_blank">中软国际</a><span
-								style="color: #666666">(08-12)</span> <br /> <span
-								style="color:#009900">聘:</span><span class="link_bk"> <a
-								href="jobs/jobs_view.jsp" target="_blank">Java程序员</a>
-							</span>
-						</div>
-					</c:forEach>
-
-				</div>
-
-				<div class="clear"></div>
-			</div>
-		</div>
-
-		<div class="clear"></div>
-
-
-	</div>
-	<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 
 

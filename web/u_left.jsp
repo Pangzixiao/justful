@@ -1,30 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script type="text/javascript">
-$(document).ready(function()
-{
-//
-$("#preview").click(function(){
-	dialog("请选择要预览的简历","id:previewbox","400px","auto","");
-});
-$(".left_menu_bg").click(function(){
-		var tb=$(this).next();
-		var tb_display=tb.css("display");
-		if (tb_display=="block")
-		{
-		tb.css("display","none");
-		$(this).find("img").attr("src","//templates/default/images/06.gif");
-		}
-		else
-		{
-		tb.css("display","block");
-		$(this).find("img").attr("src","//templates/default/images/07.gif");
-		}
-	});
 
-});
-</script>
 <div class="left_menu_home"><a href="/user/getIndex" style="color:#990000">中心首页</a>
 <a href="/user/showIntroduce" style="color:#990000" id="preview">预览简历</a>
 </div>
@@ -55,12 +32,11 @@ $(".left_menu_bg").click(function(){
 	<div class="left_menu_btop">
 	<ul>
 			<li><a href="/user/selectPositionPre" target="_blank">搜索职位</a></li>
-			<li><a href="/user/showMyApplay">待处理申请</a></li>
+			<li><a href="/user/showMyApplay">申请管理</a></li>
 			<div class="clear"></div>
 	  </ul>
 		<ul>
-			<li><a href="/user/myPassApplay">通过的申请</a></li>
-			<li><a href="/user/myNoPassApplay">被拒的申请</a></li>
+			<li><a href="/user/showMyoutdateApply">失效申请</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>
@@ -73,7 +49,7 @@ $(".left_menu_bg").click(function(){
 	</div>
 	<div class="left_menu_btop">
 	<ul>
-			<li><a href="/u_updateInfo">资料修改</a></li>
+			<li><a href="/u_updateInfo">密码修改</a></li>
 			<li><a href="/user/layout">安全退出</a></li>
 		<div class="clear"></div>
 	  </ul>

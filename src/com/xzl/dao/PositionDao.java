@@ -23,6 +23,7 @@ public interface PositionDao {
 
     @Update("update t_position set p_state = '失效' where position_id = #{position_id}")
     int outdate(int position_id);
+
     List<Map<String,Object>> MutiqueryPosition(Map<String, ObjectExpression> param);
 
     @Select("select * from t_position where company_id = #{company_id}")

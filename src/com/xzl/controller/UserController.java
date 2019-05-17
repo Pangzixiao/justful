@@ -10,8 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -29,176 +31,207 @@ public class UserController {
     TypeService typeService;
 
     @RequestMapping("/regist")
-    public ModelAndView regist(@RequestParam Map<String,Object> param, HttpSession session){
+    public ModelAndView regist(@RequestParam Map<String, Object> param, HttpSession session) {
         ModelAndView mav = new ModelAndView("/u_login");
         boolean b = userService.regist(param);
-        if( !b ){
+        if (!b) {
             mav.setViewName("/u_regist");
-            mav.addObject("msg","用户名已存在");
+            mav.addObject("msg", "用户名已存在");
         }
 
         return mav;
     }
 
     @RequestMapping("/getIndex")
-    public  ModelAndView getUserIndex(HttpSession session){
+    public ModelAndView getUserIndex(HttpSession session) {
         ModelAndView mav = new ModelAndView("redirect:/userMain");
-        String username = (String)session.getAttribute("user_login");
-        if(username == null || username.equals("")){
+        String username = (String) session.getAttribute("user_login");
+        if (username == null || username.equals("")) {
             mav.setViewName("error");
-            mav.addObject("msg","请先登录");
+            mav.addObject("msg", "请先登录");
         }
         return mav;
     }
 
     @RequestMapping("/login")
-    public ModelAndView login(HttpSession session,@RequestParam Map<String,Object> param){
+    public ModelAndView login(HttpSession session, @RequestParam Map<String, Object> param) {
         ModelAndView mav = new ModelAndView("userMain");
         boolean b = userService.login(param);
-        if(!b){
+        if (!b) {
             mav.setViewName("/u_login");
-            mav.addObject("msg","用户名错误或密码错误");
-        }else{
-            session.setAttribute("user_login",param.get("username"));
+            mav.addObject("msg", "用户名错误或密码错误");
+        } else {
+            session.setAttribute("user_login", param.get("username"));
         }
         return mav;
     }
 
     @RequestMapping("/showIntroduce")
-    public ModelAndView showIntroduce(HttpSession session){
+    public ModelAndView showIntroduce(HttpSession session) {
         ModelAndView mav = new ModelAndView("u_showIntroduce");
-        String username = (String)session.getAttribute("user_login");
-        if(username == null || username.equals("")){
+        String username = (String) session.getAttribute("user_login");
+        if (username == null || username.equals("")) {
             mav.setViewName("error");
-            mav.addObject("msg","请先登录");
-        }else{
+            mav.addObject("msg", "请先登录");
+        } else {
             int id = userService.checkIdByName(username);
-            Map<String , Object> info = introduceService.queryIntroduceById(id);
-            if(info==null||info.isEmpty()){
+            Map<String, Object> info = introduceService.queryIntroduceById(id);
+            if (info == null || info.isEmpty()) {
                 mav.setViewName("u_addIntroduce");
-                mav.addObject("id",id);
-            }else{
-                mav.addObject("info",info);
+                mav.addObject("id", id);
+            } else {
+                mav.addObject("info", info);
             }
         }
         return mav;
     }
 
     @RequestMapping("/addIntroduce")
-    public ModelAndView addIntroduce(@RequestParam Map<String , Object> param){
+    public ModelAndView addIntroduce(@RequestParam Map<String, Object> param) {
         ModelAndView mav = new ModelAndView("u_showIntroduce");
         boolean b = introduceService.addIntroduce(param);
-        if( !b ){
+        if (!b) {
             mav.setViewName("error");
-            mav.addObject("msg","添加简历失败");
-        }else{
-            Map<String,Object> info = introduceService.queryIntroduceById(Integer.parseInt( (String)param.get("user_id")));
-            mav.addObject("info",info);
+            mav.addObject("msg", "添加简历失败");
+        } else {
+            Map<String, Object> info = introduceService.queryIntroduceById(Integer.parseInt((String) param.get("user_id")));
+            mav.addObject("info", info);
         }
 
         return mav;
     }
+
     @RequestMapping("/queryIntroduce")
-    public ModelAndView queryIntroduce(HttpSession session){
+    public ModelAndView queryIntroduce(HttpSession session) {
         ModelAndView mav = new ModelAndView("u_editIntroduce");
-        String username = (String)session.getAttribute("user_login");
-        if(username == null || username.equals("")){
+        String username = (String) session.getAttribute("user_login");
+        if (username == null || username.equals("")) {
             mav.setViewName("error");
-        }else{
+        } else {
             int id = userService.checkIdByName(username);
-            Map<String , Object> info = introduceService.queryIntroduceById(id);
-            mav.addObject("info",info);
+            Map<String, Object> info = introduceService.queryIntroduceById(id);
+            mav.addObject("info", info);
         }
         return mav;
     }
 
     @RequestMapping("/updateIntroduceById")
-    public ModelAndView updateIntroduceById(@RequestParam Map<String,Object> param){
+    public ModelAndView updateIntroduceById(@RequestParam Map<String, Object> param) {
         ModelAndView mav = new ModelAndView("userMain");
         boolean b = introduceService.updateIntroduceById(param);
-        if(!b){
-            mav.addObject("msg","修改简历失败");
+        if (!b) {
+            mav.addObject("msg", "修改简历失败");
             mav.setViewName("error");
         }
         return mav;
     }
 
     @RequestMapping("/selectPositionPre")
-    public ModelAndView selectPositionPre(){
+    public ModelAndView selectPositionPre() {
         ModelAndView mav = new ModelAndView("u_findPosition");
-        List<Map<String,Object>> types = typeService.getType1();
-        mav.addObject("types",types);
+        List<Map<String, Object>> types = typeService.getType1();
+        mav.addObject("types", types);
         return mav;
     }
+
     @RequestMapping("/findPosition")
-    public ModelAndView findPosition(HttpSession session,@RequestParam(required = false,defaultValue = "1") Integer page,@RequestParam Map<String , ObjectExpression> param){
+    public ModelAndView findPosition(HttpSession session, @RequestParam(required = false, defaultValue = "1") Integer page, @RequestParam Map<String, ObjectExpression> param) {
         ModelAndView mav = new ModelAndView("u_queriedPosition");
-        PageInfo info = positionService.MutiqueryPosition(page,param);
-        mav.addObject("info",info);
-        session.setAttribute("param",param);
+        PageInfo info = positionService.MutiqueryPosition(page, param);
+        mav.addObject("info", info);
+        session.setAttribute("param", param);
         return mav;
     }
 
     @RequestMapping("/findPositionPage")
-    public ModelAndView findPositionPage(HttpSession session,@RequestParam(required = false,defaultValue = "1") Integer page){
+    public ModelAndView findPositionPage(HttpSession session, @RequestParam(required = false, defaultValue = "1") Integer page) {
         ModelAndView mav = new ModelAndView("u_queriedPosition");
-        Map<String , ObjectExpression> param = (Map<String , ObjectExpression>)session.getAttribute("param");
-        PageInfo info = positionService.MutiqueryPosition(page,param);
-        mav.addObject("info",info);
-        session.setAttribute("param",param);
+        Map<String, ObjectExpression> param = (Map<String, ObjectExpression>) session.getAttribute("param");
+        PageInfo info = positionService.MutiqueryPosition(page, param);
+        mav.addObject("info", info);
+        session.setAttribute("param", param);
         return mav;
     }
 
     @RequestMapping("/queryPositionsByCompanyId")
-    public ModelAndView queryPositionsByCompanyId(@RequestParam(required = false,defaultValue = "1") Integer page,int company_id){
+    public ModelAndView queryPositionsByCompanyId(@RequestParam(required = false, defaultValue = "1") Integer page, int company_id) {
         ModelAndView mav = new ModelAndView("u_companyPositionList");
-        PageInfo info = positionService.queryPositionByCompanyId(page,company_id);
-        Map<String,Object> comp = companyService.queryCompanyById(company_id);
-        mav.addObject("info",info);
-        mav.addObject("comp",comp);
+        PageInfo info = positionService.queryPositionByCompanyId(page, company_id);
+        Map<String, Object> comp = companyService.queryCompanyById(company_id);
+        mav.addObject("info", info);
+        mav.addObject("comp", comp);
         return mav;
     }
 
     @RequestMapping("/queryPositionById")
-    public ModelAndView queryPositionById(int position_id){
+    public ModelAndView queryPositionById(int position_id) {
         ModelAndView mav = new ModelAndView("u_showPositionInfo");
-        Map<String,Object> info = positionService.queryPositionById(position_id);
+        Map<String, Object> info = positionService.queryPositionById(position_id);
         String company_name = (String) info.get("company_name");
-        Map<String,Object> com = companyService.queryCompanyByName(company_name);
-        mav.addObject("info",info);
-        mav.addObject("com",com);
+        Map<String, Object> com = companyService.queryCompanyByName(company_name);
+        mav.addObject("info", info);
+        mav.addObject("com", com);
         return mav;
     }
+
     @RequestMapping("/queryCompanyById")
-    public  ModelAndView queryCompanyById(int company_id){
+    public ModelAndView queryCompanyById(int company_id) {
         ModelAndView mav = new ModelAndView("u_showCompanyInfo");
-        Map<String,Object> info = companyService.queryCompanyById(company_id);
-        mav.addObject("info",info);
+        Map<String, Object> info = companyService.queryCompanyById(company_id);
+        mav.addObject("info", info);
         return mav;
     }
-
-
 
     @RequestMapping("/applyPositionById")
-    public ModelAndView applyPositionById(HttpSession session,int position_id){
+    public ModelAndView applyPositionById(HttpSession session, int position_id) {
         ModelAndView mav = new ModelAndView("redirect:/userMain");
-        boolean b = applyService.applyPositionById(session,position_id);
-        if(!b){
-            mav.setViewName("error");
-            mav.addObject("msg","请登录");
+
+        boolean isExit = applyService.isApplyExit(session, position_id);
+        if (isExit) {
+            mav.setViewName("/u_apply_error");
+            mav.addObject("msg", "不可以重复申请");
+        } else {
+            boolean b = applyService.applyPositionById(session, position_id);
+            if (!b) {
+                mav.setViewName("error");
+                mav.addObject("msg", "请登录");
+            }
         }
+
         return mav;
     }
 
-   @RequestMapping("/showMyApplay")
-    public ModelAndView showMyApplay(HttpSession session, @RequestParam(required = false,defaultValue = "1") Integer page,
-                                     @RequestParam(required = false,defaultValue = "有效") String position_status){
+    @RequestMapping("/showMyApplay")
+    public ModelAndView showMyApplay(HttpSession session, @RequestParam(required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(required = false, defaultValue = "") String apply_status) {
         ModelAndView mav = new ModelAndView("u_showMyApply");
-        PageInfo info = applyService.queryByUserId(session,page,position_status);
-        mav.addObject("info",info);
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("apply_status", apply_status);
+        String username = (String) session.getAttribute("user_login");
+        Map<String, Object> m = userService.queryUserByName(username);
+        int user_id = (int) m.get("user_id");
+        param.put("user_id", user_id);
+        PageInfo info = applyService.queryByUserId( page, param);
+        mav.addObject("info", info);
+        mav.addObject("apply_status", apply_status);
         return mav;
     }
-    @RequestMapping("/myPassApplay")
+    @RequestMapping("/showMyoutdateApply")
+    public ModelAndView showMyoutdateApply(HttpSession session, @RequestParam(required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(required = false, defaultValue = "") String apply_status) {
+        ModelAndView mav = new ModelAndView("u_showMyoutdateApply");
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("apply_status", apply_status);
+        String username = (String) session.getAttribute("user_login");
+        Map<String, Object> m = userService.queryUserByName(username);
+        int user_id = (int) m.get("user_id");
+        param.put("user_id", user_id);
+        PageInfo info = applyService.queryoutByUserId( page, param);
+        mav.addObject("info", info);
+        mav.addObject("apply_status", apply_status);
+        return mav;
+    }
+    /*@RequestMapping("/myPassApplay")
     public ModelAndView myPassApplay(HttpSession session, @RequestParam(required = false,defaultValue = "1") Integer page,
                                      @RequestParam(required = false,defaultValue = "邀请面试") String apply_status) {
         ModelAndView mav = new ModelAndView("u_showMyPassApply");
@@ -214,23 +247,23 @@ public class UserController {
         PageInfo info = applyService.queryPassByUserId(session, page, apply_status);
         mav.addObject("info", info);
         return mav;
-    }
+    }*/
 
     @RequestMapping("/updatePass")
-    public ModelAndView updatePass(String oldpassword,String password,HttpSession session){
+    public ModelAndView updatePass(String oldpassword, String password, HttpSession session) {
         ModelAndView mav = new ModelAndView("u_updateInfo");
-        String username = (String)session.getAttribute("user_login");
-        if(username == null || username.equals("")){
+        String username = (String) session.getAttribute("user_login");
+        if (username == null || username.equals("")) {
             mav.setViewName("error");
-            mav.addObject("msg","请先登录");
-        }else{
-            Map<String,Object> map  = userService.queryUserByName(username);
+            mav.addObject("msg", "请先登录");
+        } else {
+            Map<String, Object> map = userService.queryUserByName(username);
             String pass = (String) map.get("password");
-            if(oldpassword.equals(pass)){
-                boolean b = userService.updatePasswordByName(username,password);
+            if (oldpassword.equals(pass)) {
+                boolean b = userService.updatePasswordByName(username, password);
                 mav.setViewName("redirect:/userMain");
-            }else{
-                mav.addObject("msg","用户名或密码错误");
+            } else {
+                mav.addObject("msg", "用户名或密码错误");
                 mav.setViewName("u_updateInfo");
             }
         }
@@ -238,8 +271,8 @@ public class UserController {
     }
 
     @RequestMapping("/layout")
-    public ModelAndView layout(HttpSession session){
-        ModelAndView mav = new ModelAndView("index");
+    public ModelAndView layout(HttpSession session) {
+        ModelAndView mav = new ModelAndView("redirect:/index");
         session.removeAttribute("user_login");
         return mav;
     }

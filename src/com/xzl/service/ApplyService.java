@@ -45,17 +45,29 @@ public class ApplyService {
         }
     }
 
-    public PageInfo queryByUserId(HttpSession session,Integer page, String position_status) {
-        PageHelper.startPage(page,3);
-        Map<String,Object> param = new HashMap<String, Object>();
-        param.put("position_status",position_status);
+    public boolean isApplyExit(HttpSession session, int position_id) {
         String username = (String)session.getAttribute("user_login");
-        Map<String,Object> p = new HashMap<String, Object>();
-        p.put("username",username);
-        Map<String,Object> m  = userDao.queryByName(p);
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("username",username);
+        Map<String,Object> m  = userDao.queryByName(param);
         int user_id = (int) m.get("user_id");
         param.put("user_id",user_id);
+        param.put("position_id",position_id);
+        List<Map<String,Object>> list = applyDao.isApplyExit(param);
+        return list.size()>0;
+    }
+
+    public PageInfo queryByUserId(Integer page, Map<String,Object> param) {
+        PageHelper.startPage(page,3);
+
         List<Map<String,Object>> list = applyDao.queryApplyByUserId(param);
+        return new PageInfo<Map<String,Object>>(list);
+    }
+
+    public PageInfo queryoutByUserId(Integer page, Map<String,Object> param) {
+        PageHelper.startPage(page,3);
+
+        List<Map<String,Object>> list = applyDao.queryoutApplyByUserId(param);
         return new PageInfo<Map<String,Object>>(list);
     }
 
@@ -148,4 +160,6 @@ public class ApplyService {
         List<Map<String,Object>> list = applyDao.passedApplyByCom(p_cname);
         return new PageInfo<Map<String,Object>>(list);
     }
+
+
 }
