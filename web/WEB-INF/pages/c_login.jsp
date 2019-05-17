@@ -57,7 +57,7 @@
 			</tr>
 		  <tr>
 			<td align="right" style="border-top:1px  #E8E8E8 solid">&nbsp;</td>
-			<td height="20" class="link_lan" style="border-top:1px  #E8E8E8 solid">还没有账号？<a href="users/register.jsp">免费注册</a></td>
+			<td height="20" class="link_lan" style="border-top:1px  #E8E8E8 solid">还没有账号？<a href="/c_regist">免费注册</a></td>
 		  </tr>
 		  		</table>
 		</form>
@@ -109,6 +109,5 @@
     });
 
 </script>
-<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

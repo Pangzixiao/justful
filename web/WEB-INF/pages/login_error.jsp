@@ -13,7 +13,7 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 
 <div class="login_bg">
-	${msg}
+	请先登录
   </div>
   <div class="clear"></div>
 </div>

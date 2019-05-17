@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td class="itemtxt">发布招聘信息<br /> 搜索人才 <br /> 下载简历 <br />
+					<td class="itemtxt">发布招聘信息<br />  查看简历 <br />
 						邀请面试<br />......</td>
 				</tr>
 				<tr>
@@ -50,7 +50,7 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td class="itemtxt">创建简历<br /> 搜索职位<br /> 在线申请职位 <br />
-						职位收藏夹<br />......</td>
+						......</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -63,6 +63,5 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<jsp:include page="${pageContext.request.contextPath}/footer.jsp" />
 </body>
 </html>

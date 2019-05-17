@@ -100,6 +100,5 @@
 		<a  href="${pageContext.request.contextPath}/adm/mutilqueryUsers?page=${info.pages}&check_type=${check_type}&username=${username}">尾页</a>
 	</div>
 </div>
-<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

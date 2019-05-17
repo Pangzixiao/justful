@@ -28,6 +28,36 @@
         <property name="maxUploadSize" value="-1"/>
     </bean>
 
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/regist"/>
+            <!--配置拦截器对象-->
+            <bean class="com.xzl.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/company/**"/>
+            <mvc:exclude-mapping path="/company/c_regist"/>
+            <mvc:exclude-mapping path="/company/c_login"/>
+            <mvc:exclude-mapping path="/company/type2"/>
+            <mvc:exclude-mapping path="/company/type3"/>
+            <!--配置拦截器对象-->
+            <bean class="com.xzl.interceptor.CompanyInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/adm/**"/>
+            <mvc:exclude-mapping path="/adm/showIntroduce"/>
+            <mvc:exclude-mapping path="/adm/login"/>
+            <!--配置拦截器对象-->
+            <bean class="com.xzl.interceptor.AdmInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 两个标准配置 -->
     <!-- 将springmvc 不能处理的请求交给tomcat -->
     <mvc:default-servlet-handler/>

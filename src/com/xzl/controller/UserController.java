@@ -276,4 +276,13 @@ public class UserController {
         session.removeAttribute("user_login");
         return mav;
     }
+
+    @RequestMapping("/findJobPre")
+    public ModelAndView findJobPre(String p_name){
+        ModelAndView mav = new ModelAndView("u_findPosition");
+        List<Map<String, Object>> types = typeService.getType1();
+        mav.addObject("types", types);
+        mav.addObject("p_name",p_name);
+        return mav;
+    }
 }

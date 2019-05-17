@@ -99,6 +99,5 @@
         </td>
     </tr>
 </table>
-<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

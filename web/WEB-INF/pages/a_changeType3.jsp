@@ -47,6 +47,5 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<jsp:include page="${pageContext.request.contextPath}/footer.jsp" />
 </body>
 </html>

@@ -31,21 +31,23 @@
 				<div class="search">
 					<div class="left">
 						<div class="keybox">
+							<form action="/user/findJobPre">
 							<div class="keyinputbox">
-								<input name="key" type="text" id="index-search-key"
+								<input name="p_name" type="text" id="index-search-key"
 									maxlength="25" value="" style="color: #CCCCCC" />
 							</div>
 							<div class="subinputbox">
-								<input type="button" id="index-search-button" value="搜职位" />
+								<input type="submit" id="index-search-button" value="搜职位" />
 							</div>
+							</form>
 							<div class="clear"></div>
 						</div>
 						<div class="hotkey link_bk">
-							热门关键字：<a href="jobs/jobs_list.jsp" target="_blank">销售代表</a>
-							&nbsp;&nbsp;&nbsp;<a href="" target="_blank">销售经理</a>
-							&nbsp;&nbsp;&nbsp;<a href="" target="_blank">会计</a>
-							&nbsp;&nbsp;&nbsp;<a href="" target="_blank">销售工程师</a>
-							&nbsp;&nbsp;&nbsp;<a href="" target="_blank">销售助理</a>&nbsp;&nbsp;&nbsp;
+							热门关键字：<a href="/user/findJobPre?p_name=销售代表" target="_blank">销售代表</a>
+							&nbsp;&nbsp;&nbsp;<a href="/user/findJobPre?p_name=销售经理" target="_blank">销售经理</a>
+							&nbsp;&nbsp;&nbsp;<a href="/user/findJobPre?p_name=会计" target="_blank">会计</a>
+							&nbsp;&nbsp;&nbsp;<a href="/user/findJobPre?p_name=销售工程师" target="_blank">销售工程师</a>
+							&nbsp;&nbsp;&nbsp;<a href="/user/findJobPre?p_name=销售助理" target="_blank">销售助理</a>&nbsp;&nbsp;&nbsp;
 						</div>
 					</div>
 					<div class="right link_orange">

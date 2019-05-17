@@ -34,7 +34,7 @@
 						<div class="keybox">
 							<div class="keyinputbox">
 								<input name="p_name" type="text" id="index-search-key"
-									maxlength="25" value="" style="color: #CCCCCC" />
+									maxlength="25" value="${p_name}" style="color: #CCCCCC" />
 							</div>
 							<div class="subinputbox">
 								<input type="submit" id="index-search-button" value="搜职位" />
